@@ -3,7 +3,7 @@
 include __DIR__ . '/../config/config.php';
 
 // CORS HEADERS CONFIGURATION
-header('Access-Control-Allow-Origin: *');  
+header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Credentials: true");
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS, PATCH');
 header('Access-Control-Max-Age: 1000');

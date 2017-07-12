@@ -12,7 +12,6 @@ $dbconfig = [
     'prefix' => '',
 ];
 
-/*
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 $capsule = new Capsule;
@@ -21,4 +20,3 @@ $capsule->addConnection($dbconfig);
 $capsule->setAsGlobal();
 // Setup the Eloquent ORM
 $capsule->bootEloquent();
-*/

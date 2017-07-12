@@ -1,20 +1,14 @@
 {
-    "name": "wpkenpachi/phpmvc",
-    "description": "A easy php framework with mvc structure...",
+    "name": "mvc",
+    "description": "PHP MVC",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Wesley Paulo",
-            "email": "angelportinari17@gmail.com"
-        }
-    ],
     "require": {
         "Illuminate/database": "^5.4"
     },
     "autoload": {
-    	"psr-4": {
-    		"core\\":"framework",
+        "psr-4": {
+            "core\\": "framework",
             "app\\": "app"
-    	}
+        }
     }
 }
