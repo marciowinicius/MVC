@@ -6,7 +6,8 @@ use core\View;
 use core\phprender;
 use app\controller\Request;
 
-class init {
+class init
+{
 
     protected $Routes;
     private $Url;
@@ -22,7 +23,8 @@ class init {
     //					HTTP VERBS  FUNCTIONS 	 					//
     //																//
     //==============================================================//
-    public function get($url, $controller) {
+    public function get($url, $controller)
+    {
         $this->Verb = "get";
         $this->Data = $url; //$this->resolve_request_vars($url);
 
@@ -30,7 +32,8 @@ class init {
         $this->verifyCtrl($controller);
     }
 
-    public function post($url, $controller, $var = null) {
+    public function post($url, $controller, $var = null)
+    {
         $this->Verb = "post";
         $this->Data = $var;
 
@@ -38,7 +41,8 @@ class init {
         $this->verifyCtrl($controller);
     }
 
-    public function patch($url, $controller, $var = null) {
+    public function patch($url, $controller, $var = null)
+    {
         $this->Verb = "patch";
         $this->Data = $var;
 
@@ -46,7 +50,8 @@ class init {
         $this->verifyCtrl($controller);
     }
 
-    public function put($url, $controller, $var = null) {
+    public function put($url, $controller, $var = null)
+    {
         $this->Verb = "put";
         $this->Data = $var;
 
@@ -54,7 +59,8 @@ class init {
         $this->verifyCtrl($controller);
     }
 
-    public function delete($url, $controller, $var = null) {
+    public function delete($url, $controller, $var = null)
+    {
         $this->Verb = "delete";
         $this->Data = $var;
 
@@ -63,7 +69,8 @@ class init {
     }
 
     // VERIFY IF THE ROUTE DEAL WITH CONTROLLER OR ANONYMOUS FUNCTION 
-    private function verifyCtrl($ctrl) {
+    private function verifyCtrl($ctrl)
+    {
 
         if (is_object($ctrl)) {
             $this->Controller = $ctrl;
@@ -78,7 +85,8 @@ class init {
     }
 
     //  BUILD THE ROUTE WITH YOUR FIELDS
-    private function buildRoute() {
+    private function buildRoute()
+    {
 
         $this->Routes[] = [
             'verb' => $this->Verb,
@@ -93,7 +101,8 @@ class init {
         fclose($routes);
     }
 
-    public function getRoutes() {
+    public function getRoutes()
+    {
 
         echo '<pre>';
         print_r($this->Routes);
@@ -107,7 +116,8 @@ class init {
     //																//
     //==============================================================//
 
-    public function toRender($path = null, array $dataBind = null, $render_engine = null) {
+    public function toRender($path = null, array $dataBind = null, $render_engine = null)
+    {
         extract($dataBind);
         if ($render_engine == null) {
             include $this->render_view($path);
@@ -121,15 +131,18 @@ class init {
         }
     }
 
-    public function render_template($path) {
+    public function render_template($path)
+    {
         return __DIR__ . "/../app/views/templates/" . $path;
     }
 
-    private function render_view($path) {
+    private function render_view($path)
+    {
         return __DIR__ . "/../app/views/" . $path;
     }
 
-    protected function helper($dado) {
+    protected function helper($dado)
+    {
         echo "<pre>";
         print_r($dado);
         echo "</pre>";

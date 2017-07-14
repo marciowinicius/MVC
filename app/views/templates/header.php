@@ -7,6 +7,12 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.15/af-2.2.0/b-1.3.1/r-2.1.1/datatables.min.css"/>
+<!--<link rel="stylesheet" type="text/css" href="/plugins/datatables/dataTables.bootstrap.css"/>-->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.15/af-2.2.0/b-1.3.1/r-2.1.1/datatables.min.js"></script>
+<!--<script type="text/javascript" src="/plugins/datatables/dataTables.bootstrap.js"></script>-->
+
 <nav class="navbar navbar-default">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->

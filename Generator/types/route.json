@@ -1,1 +1,1 @@
-[{"verb":"get","url":"","controller":"HomeController","action":"principal","data":""}]
+[{"verb":"get","url":"","controller":"HomeController","action":"index","data":""},{"verb":"get","url":"montagem","controller":"MontagemController","action":"index","data":"montagem"},{"verb":"post","url":"montagem\/data","controller":"MontagemController","action":"data","data":null}]

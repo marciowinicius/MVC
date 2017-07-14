@@ -2,7 +2,8 @@
 
 namespace core;
 
-class phprender {
+class phprender
+{
 
     private $Html;
     private $Filename;
@@ -25,7 +26,8 @@ class phprender {
     // Opening Structs
 
 
-    function __construct($html, $file = null) {
+    function __construct($html, $file = null)
+    {
         if ($file) {
             $this->Html = file_get_contents($html);
         } else {
@@ -34,13 +36,15 @@ class phprender {
         $this->FindVars();
     }
 
-    private function FindVars() {
+    private function FindVars()
+    {
         preg_match_all($this->Regex_ToFindVars, $this->Html, $this->Vars_Found);
         //var_dump($this->Vars_Found);die();
         $this->ReplacingVars_OutOf_Structs($this->Vars_Found[0]);
     }
 
-    private function ReplacingVars_OutOf_Structs($outsideVars) {
+    private function ReplacingVars_OutOf_Structs($outsideVars)
+    {
         $replaced = null;
         foreach ($outsideVars as $key) {
             preg_match($this->Regex_ToReplaceFound, $key, $replaced);
@@ -51,11 +55,13 @@ class phprender {
         $this->ReplacingVars_InsideOf_Structs();
     }
 
-    private function ReplacingVars_InsideOf_Structs() {
+    private function ReplacingVars_InsideOf_Structs()
+    {
         $this->ReplacingStructs_Opennings();
     }
 
-    private function ReplacingStructs_Opennings() {
+    private function ReplacingStructs_Opennings()
+    {
         // Openners
         $this->Html = str_replace(":>", "<?php ", $this->Html);
         //if
@@ -70,7 +76,8 @@ class phprender {
         $this->ReplacingStructs_Closing();
     }
 
-    private function ReplacingStructs_Closing() {
+    private function ReplacingStructs_Closing()
+    {
         // Closers
         $this->Html = str_replace("):", "): ?>", $this->Html);
         $this->Html = str_replace("<:", " ?>", $this->Html);
@@ -82,7 +89,8 @@ class phprender {
         $this->Html = str_replace("@endforeach", '<?php endforeach; ?>', $this->Html);
     }
 
-    public function getHtml() {
+    public function getHtml()
+    {
         return $this->Html;
     }
 

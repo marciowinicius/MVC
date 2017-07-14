@@ -5,7 +5,8 @@ namespace core;
 // To use a native the simple native ORM 'FSBRDatabase'
 use core\FSBRDatabase;
 
-class mvc extends init {
+class mvc extends init
+{
 
     protected static $Request;
     protected $Database;
@@ -16,11 +17,13 @@ class mvc extends init {
     protected $Requested_Url = null;
     protected $Route_Compatible = null;
 
-    function __construct() {
+    function __construct()
+    {
         $this->Database = new FSBRDatabase;
     }
 
-    public function run() {
+    public function run()
+    {
         $this->Url_Current = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Pegando URL NO BROWSER
         $this->Url_Current = substr($this->Url_Current, 1); // ELIMINANDO BARRA inicial '/'
         // Obtendo e tratando método da requisição.
@@ -33,10 +36,11 @@ class mvc extends init {
     }
 
     // Quebra Url, e trata possíveis espaços(keys/chaves) em branco gerados pelo explode
-    private function treat_url_slashes(&$url_tree_array) {
+    private function treat_url_slashes(&$url_tree_array)
+    {
         $array = explode('/', $url_tree_array);
         $branchs = [];
-        array_walk($array, function($branch) use (&$branchs) {
+        array_walk($array, function ($branch) use (&$branchs) {
             if (!empty($branch) && isset($branch)) {
                 $branchs[] = $branch;
             }
@@ -45,7 +49,8 @@ class mvc extends init {
         return implode('/', $branchs);
     }
 
-    private function route_string_comparison() {
+    private function route_string_comparison()
+    {
         // Verify if the url plane string is recognized
         // Simple Comparison
         foreach ($this->Routes as $route) {
@@ -62,7 +67,8 @@ class mvc extends init {
         }
     }
 
-    public function route_tree_keys_comparison() {
+    public function route_tree_keys_comparison()
+    {
         // Convert the url plane string in an tree keys array
         // Detailed comparison
         $url_tree_keys = explode('/', $this->Url_Current); // broken the current url
@@ -107,7 +113,8 @@ class mvc extends init {
         }
     }
 
-    private function verify_regex($branchs) {
+    private function verify_regex($branchs)
+    {
         $return = null;
         foreach ($branchs as $branch) {
             if (preg_match($this->Find_Var_Regex, $branch)) {
@@ -119,22 +126,26 @@ class mvc extends init {
         return $return;
     }
 
-    private function get_url_vars($keys, $values) {
+    private function get_url_vars($keys, $values)
+    {
         $keys = preg_replace('/[\{\}]+/', '', $keys);
         $url_vars = array_combine($keys, $values);
         $this->Url_Vars = $url_vars;
     }
 
-    private function url_not_found() {
+    private function url_not_found()
+    {
         //echo 'nada encontrado';
         exit(http_response_code(404));
     }
 
-    private function url_found($route) {
+    private function url_found($route)
+    {
         $this->exec($route['controller'], $route['action'], $this->Url_Vars, $route['verb']);
     }
 
-    private function exec($ctrl, $action, $vars, $verb) {
+    private function exec($ctrl, $action, $vars, $verb)
+    {
 
         $this->setParams($this->verbVerify($vars, $verb));
 
@@ -151,7 +162,8 @@ class mvc extends init {
 
     // Verifica o tipo de requisição, pra obter o conteúdo da forma correta;
     // O retorno disso, é passado como argumento, pra função do controller;
-    private function verbVerify($vars, $verb) {
+    private function verbVerify($vars, $verb)
+    {
         switch ($verb) {
             case 'get':
                 $return = $this->return_get($vars);
@@ -173,13 +185,15 @@ class mvc extends init {
     }
 
     // Retorno da requisição GET
-    private function return_get($vars) {
+    private function return_get($vars)
+    {
         return $return['gets'] = $vars;
     }
 
     // Retorno da requisição POST
-    private function return_post($vars) {
-
+    private function return_post($vars)
+    {
+        $return = NULL;
         $data = $this->validate_content_type();
 
         if (isset($data) && !empty($data)) {
@@ -193,7 +207,8 @@ class mvc extends init {
     }
 
     // Retorno da requisição PATCH
-    private function return_patch() {
+    private function return_patch()
+    {
         $data = $this->validate_content_type();
 
         if (isset($data) && !empty($data)) {
@@ -207,7 +222,8 @@ class mvc extends init {
     }
 
     // Retorno da requisição PUT
-    private function return_put() {
+    private function return_put()
+    {
         $data = $this->validate_content_type();
 
         if (isset($data) && !empty($data)) {
@@ -221,7 +237,8 @@ class mvc extends init {
     }
 
     // Retorno da requisição DELETE
-    private function return_delete() {
+    private function return_delete()
+    {
         $data = $this->validate_content_type();
 
         if (isset($data) && !empty($data)) {
@@ -235,8 +252,10 @@ class mvc extends init {
     }
 
     // validate content type and return the content as array
-    private function validate_content_type() {
+    private function validate_content_type()
+    {
 
+        $return_content = NULL;
         $headers = getallheaders(); // Pegando todos os headers da requisição
 
         switch ($headers['Content-Type']) {
@@ -252,7 +271,8 @@ class mvc extends init {
     }
 
     // Resolve url data of x-www-form-urlencoded
-    function resolve_url_data($url_vars) {
+    function resolve_url_data($url_vars)
+    {
 
         $params = urldecode($url_vars);
         $params = explode('&', $params);
@@ -268,7 +288,8 @@ class mvc extends init {
 
     // Parametro que seta o Atributo Request (init), com os parametros
     // atuais passados a rota.
-    public function setParams($params) {
+    public function setParams($params)
+    {
         self::$Request = $params;
     }
 
